@@ -1,0 +1,36 @@
+{
+  "name": "typescript-course",
+  "version": "1.0.0",
+  "description": "API Desenvolvida utilizando TypeScript, Node, Es6, Postgre e Sequelize",
+  "main": "server/server.ts",
+  "scripts": {
+    "start": "./node_modules/.bin/ts-node ./server/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagomartos/typescript-course.git"
+  },
+  "keywords": [
+    "API",
+    "Typescript",
+    "Node",
+    "ES6"
+  ],
+  "author": "Thiago Martos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thiagomartos/typescript-course/issues"
+  },
+  "homepage": "https://github.com/thiagomartos/typescript-course#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "morgan": "^1.9.1",
+    "pg": "^7.8.1"
+  },
+  "devDependencies": {
+    "ts-node": "^8.0.2"
+  }
+}
