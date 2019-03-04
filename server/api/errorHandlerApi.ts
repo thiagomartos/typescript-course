@@ -6,5 +6,5 @@ export function errorHandlerApi(err: ErrorRequestHandler, req: Request, res: Res
     res.status(500).json({
         errorCode: 'ERR-001',
         message: 'Erro Interno do servidor'
-    })
+    });
 }
