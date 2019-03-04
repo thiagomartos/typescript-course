@@ -1,41 +1,52 @@
-import * as HTTPStatus from 'http-status';
 import { Request, Response } from 'express';
+import * as _ from 'lodash';
+import User from './service';
+import { onSuccess } from '../../api/responses/successHandler';
+import { onError } from '../../api/responses/errorHandler';
+import { dbErrorHandler } from '../../config/dberrorHandler';
 
-class UserController{
+class UserController {
 
-    constructor(){
+    constructor() { }
 
+    getAll(req: Request, res: Response) {
+        User.getAll()
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onError, res, 'Erro ao buscar todos os usuários'));
     }
 
-    getAll(req: Request, res: Response){
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
-        });
+    getById(req: Request, res: Response) {
+        User.getById(parseInt(req.params.id))
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onError, res, 'Erro ao buscar usuário'));
     }
 
-    createUser(req: Request, res: Response){
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
-        });
+    getByEmail(req: Request, res: Response) {
+        User.getByEmail(req.params.email)
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onError, res, 'Erro ao buscar usuário'));
     }
-    
-    getById(req: Request, res: Response){
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
-        });
+
+    createUser(req: Request, res: Response) {
+        User.create(req.body)
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(dbErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao cadastrar usuário'));
     }
-    
-    updateUser(req: Request, res: Response){
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
-        });
+
+    updateUser(req: Request, res: Response) {
+        User.update(parseInt(req.params.id), req.body)
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(dbErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao cadastrar usuário'));
     }
-    
-    deleteUser(req: Request, res: Response){
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
-        });
+
+    deleteUser(req: Request, res: Response) {
+        User.delete(parseInt(req.params.id))
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(dbErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao excluir usuário'));;
     }
 }
 
-export default UserController;
+export default new UserController();
